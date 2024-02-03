@@ -17,7 +17,7 @@ async function Login() {
                         console.log("user panel")
                     }
                     else if (snapshot.val() != undefined && snapshot.val()["userType"] == "admin") {
-                        console.log("admin panel")
+                        window.location.replace("../../AdminPanel/Dashbaord/index.html")
 
                     }
                 })
