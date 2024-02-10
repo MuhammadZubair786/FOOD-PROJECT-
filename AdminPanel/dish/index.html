@@ -2,62 +2,113 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    img{
+    /* width: 100px; */
+    height: 50px;
+}
+table{
+    text-align:  center;
+    padding: 10px;
+    
+}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.css" integrity="sha512-VSD3lcSci0foeRFRHWdYX4FaLvec89irh5+QAGc00j5AOdow2r5MFPhoPEYBUQdyarXwbzyJEO7Iko7+PnPuBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.min.css" integrity="sha512-UiKdzM5DL+I+2YFxK+7TDedVyVm7HMp/bN85NeWMJNYortoll+Nd6PU9ZDrZiaOsdarOyk9egQm6LOJZi36L2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
 </head>
 
 <body>
 
-    <h1 style="text-align: center;">Add Dish</h1>
-    <button type="button" class="btn btn-warning " style="margin: auto;width: 200px;display: block;"
-        data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add Category
-    </button>
+  <h1 style="text-align: center;">Add Dish</h1>
+  <button type="button" class="btn btn-warning " style="margin: auto;width: 200px;display: block;"
+    data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Category
+  </button>
+
+  <div class="container">
+    <table  class="table table-success table-striped m-3 mt-5 my-5">
+      <thead>
+        <th>S.No</th>
+        <th>Category name</th>
+        <th>Dish name</th>
+        <th>Dish price</th>
+        <th>Dish image</th>
+      </thead>
+      <tbody id="table_data">
+
+      </tbody>
+     
+    </table>
+
+  </div>
 
 
 
 
-    <!-- Add Dish Modal -->
-    <div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel" >Add Dish</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <select class="form-control">
-                    <option>Select Category</option>
-                </select>
-                <br/>
-             <input type="text" class="form-control" placeholder="Enter Dish Name" id="category"/>
-             <br/>
-             <input type="text" class="form-control" placeholder="Enter Price" id="category"/>
-             <br/>
-           
-             <img src="" id="cat_image" style="display: none;"/>
-             <input type="file" class="mt-2 form-control" placeholder="Enter Category" id="image"/>
-            
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="model1">Close</button>
-              <button type="button" class="btn btn-primary" onclick="AddCategory()" id="btn" disabled>Add Category</button>
-            </div>
-          </div>
+  <!-- Add Dish Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Dish</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <select class="form-control" id="category-data" >
+            <option>Select Category</option>
+          </select>
+          <br />
+          <input type="text" class="form-control" placeholder="Enter Dish Name" id="dish_name" />
+          <br />
+          <input type="text" class="form-control" placeholder="Enter Price" id="dish_price" />
+          <br />
+
+          <img src="" id="dish_image" style="display: none;" />
+          <input type="file" class="mt-2 form-control" placeholder="Enter Dish Picture" id="image" />
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="model1">Close</button>
+          <button type="button" class="btn btn-primary" onclick="AddDish()" id="btn" disabled>Add Dish</button>
         </div>
       </div>
+    </div>
+  </div>
 
 
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="app.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-storage-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBG91KgrpLeuULJv9Dwyo9rdTH1coyZ-FA",
+      authDomain: "food-web-9ecef.firebaseapp.com",
+      databaseURL: "https://food-web-9ecef-default-rtdb.firebaseio.com",
+      projectId: "food-web-9ecef",
+      storageBucket: "food-web-9ecef.appspot.com",
+      messagingSenderId: "924916927643",
+      appId: "1:924916927643:web:e1198153a6ed2118a08a3e"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.min.js" integrity="sha512-79j1YQOJuI8mLseq9icSQKT6bLlLtWknKwj1OpJZMdPt2pFBry3vQTt+NZuJw7NSd1pHhZlu0s12Ngqfa371EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="app.js"></script>
 
 
 </body>
