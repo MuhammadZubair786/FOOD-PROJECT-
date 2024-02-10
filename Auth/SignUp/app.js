@@ -13,7 +13,7 @@ async function createAccount() {
                 email:email.value,
                 password:password.value,
                 userName:userName.value,
-                userType:"user",
+                userType:"admin",
                 userId,
 
             }
@@ -47,3 +47,6 @@ async function createAccount() {
         })
 
 }
+
+// smit@admin.com
+// Admin123
