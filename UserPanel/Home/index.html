@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a{
+            margin: 10px;
+            text-decoration: none !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid" style="height: 100%;background-color: antiquewhite;">
+        <div class="row">
+            <div class="col" >
+                <a href="">Home</a>
+                <a href="">Orders</a>
+                <a href="">Add to card</a>
+
+            </div>
+        </div>
+        <div class="col col-lg-12" id="spinner" >
+            <div style="margin: auto;width: 500px;margin-top : 20px;margin-bottom: 20px;">
+                <div class="spinner-border text-light" role="status" style="height: 300px;width: 300px;">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </div>
+           
+        </div>
+        <div class="container" style="background-color: rgb(174, 114, 36);">
+            <div class="row" id="category_card">
+              
+              
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-database-compat.js"></script>
+
+
+    <script src="../../Configration/firebase.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -119,7 +119,7 @@ async function ViewDishes() {
                     console.log(newdata)
                     for (var j in newdata) {
                         // console.log(newdata[i])
-                        mainData.push(newdata[i])
+                        mainData.push(newdata[j])
 
                     }
 
@@ -130,6 +130,7 @@ async function ViewDishes() {
         })
 
         for(var i in mainData){
+            console.log(mainData[i])
             table_data.innerHTML += `
             <tr>
   <th scope="row">${(Number(i) + 1)}</th>
