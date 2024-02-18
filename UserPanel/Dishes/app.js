@@ -3,7 +3,7 @@ var dish_card = document.getElementById("dish_card")
 var add_to_Card_List = localStorage.getItem("add_to_card")
 var userId = localStorage.getItem("userId")
 var maindata = []
-if(userId==null){
+if (userId == null) {
     window.location.href = "../../Auth/SignIn/index.html"
 
 }
@@ -72,9 +72,9 @@ function AddToCard(e) {
         }
         i++
     }
-    if (check==false) {
+    if (check == false) {
         maindata[e.id]["userId"] = userId
-        maindata[e.id]["quantity"] = 3
+        maindata[e.id]["quantity"] = 1
         console.log(maindata)
         data.push(maindata[e.id])
         localStorage.setItem("add_to_card", JSON.stringify(data))
@@ -86,15 +86,15 @@ function AddToCard(e) {
 
             duration: 3000,
             style: {
-                background : "green"
-              },
+                background: "green"
+            },
 
 
         }).showToast();
 
 
     }
-    else{
+    else {
         Toastify({
 
             text: "Add To cart Already",
@@ -102,20 +102,11 @@ function AddToCard(e) {
 
             duration: 3000,
             style: {
-                background : "red"
-              },
+                background: "red"
+            },
 
 
         }).showToast();
- 
+
     }
-
-
-
-
-
-
-
-
-
 }
