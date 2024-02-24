@@ -5,7 +5,6 @@ var userId = localStorage.getItem("userId")
 var maindata = []
 if (userId == null) {
     window.location.href = "../../Auth/SignIn/index.html"
-
 }
 
 else if (dish_key == null) {

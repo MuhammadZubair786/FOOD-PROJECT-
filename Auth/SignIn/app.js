@@ -12,9 +12,10 @@ async function Login() {
 
             await firebase.database().ref("users").child(userId).get()
                 .then((snapshot) => {
-                    console.log(snapshot.val())
+                    console.log(snapshot.val()["userName"])
                     if (snapshot.val() != undefined && snapshot.val()["userType"] == "user") {
                        localStorage.setItem("userId",userId)
+                       localStorage.setItem("username",JSON.stringify(snapshot.val()["userName"]) )
                         window.location.replace("../../UserPanel/Home/index.html")
 
                     }
