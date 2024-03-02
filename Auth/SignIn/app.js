@@ -4,6 +4,7 @@ let password = document.getElementById("password")
 
 
 async function Login() {
+    console.log(firebase)
 
     await firebase.auth().signInWithEmailAndPassword(email.value, password.value)
         .then(async (snap) => {

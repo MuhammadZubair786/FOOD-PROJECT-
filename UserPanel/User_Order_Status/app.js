@@ -19,7 +19,7 @@ async function getAllorders(){
                   <p class="card-text">Total Amount : ${data[i]["total_amount"]}</p>
                   <p class="card-text">Status : ${data[i]["status"]}</p>
 
-                  <a href="#" class="btn btn-primary">View Order Details</a>
+                  <a href="#" class="btn btn-primary" id='${data[i]["orderKey"]}' onclick='ViewDetails(this)'>View Order Details</a>
                 </div>
               </div>
         </div>
@@ -34,3 +34,10 @@ async function getAllorders(){
 }
 
 getAllorders()
+
+function ViewDetails(e){
+    console.log(e)
+    localStorage.setItem("current_order",e.id)
+    window.location.href="../Order_Details/index.html"
+
+}

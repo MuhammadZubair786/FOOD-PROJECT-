@@ -13,7 +13,7 @@ async function createAccount() {
                 email:email.value,
                 password:password.value,
                 userName:userName.value,
-                userType:"admin",
+                userType:"user",
                 userId,
 
             }

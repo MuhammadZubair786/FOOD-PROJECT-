@@ -42,3 +42,8 @@ function ViewDish(e){
 }
 
 getAllCategories()
+
+function logout(){
+    localStorage.clear()
+    window.location.replace("../../index.html")
+}

@@ -24,7 +24,7 @@ async function getAllOrder(status) {
               <p class="card-text">Total No Of Dishes :  ${data[i]["dishes"].length} </p>
             
               <a href="#" class="btn btn-danger" id='${data[i]['orderKey']}' onclick='order_Status_Update(this)'>Reject</a>
-              <a href="#" class="btn btn-primary">Views Order </a>
+              <a  class="btn btn-primary" id='${data[i]["orderKey"]}' onclick="viewOrder(this)">Views Order </a>
               <a href="#" class="btn btn-success"  id='${data[i]['orderKey']}' onclick='order_Status_Update(this)'>Accept</a>
               
             </div>
@@ -43,7 +43,7 @@ async function getAllOrder(status) {
               <p class="card-text">Total No Of Dishes :  ${data[i]["dishes"].length} </p>
             
               
-              <a href="#" class="btn btn-primary">Views Order </a>
+              <a  class="btn btn-primary" id='${data[i]["orderKey"]}' onclick="viewOrder(this)">Views Order </a>
              
               
             </div>
@@ -80,5 +80,12 @@ async function order_Status_Update(e) {
 
   // e.remove()
 
+
+}
+
+function viewOrder(e){
+  console.log(e.id)
+  localStorage.setItem("Current_order_detail",e.id)
+  window.location.href="../order_details_page/index.html"
 
 }
