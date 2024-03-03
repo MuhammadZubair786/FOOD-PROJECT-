@@ -66,7 +66,8 @@ async function order_Status_Update(e) {
   var userId = e.parentNode.childNodes[1].id
   var order_status = e.innerText.toLowerCase()
   var order_key = e.id
-
+  var price = e.parentNode.childNodes[3].innerText.split(":")
+  var newprice = price[1].replace(" ", "")
 
   await firebase.database().ref("allorders").child(order_key).update({
     "status": order_status
@@ -76,6 +77,29 @@ async function order_Status_Update(e) {
     "status": order_status
   })
 
+  await firebase.database().ref("allorders").child(order_key)
+    .get().then(async (snap) => {
+      console.log(snap.val())
+      if (order_status == "accept") {
+        await firebase.database().ref("payments").child(order_key).update({
+          "payment": newprice,
+          "order ": snap.val()
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+
+
+
+ 
+
+
+
+
+  // }
+
   e.parentNode.parentNode.parentNode.remove()
 
   // e.remove()
@@ -83,9 +107,9 @@ async function order_Status_Update(e) {
 
 }
 
-function viewOrder(e){
+function viewOrder(e) {
   console.log(e.id)
-  localStorage.setItem("Current_order_detail",e.id)
-  window.location.href="../order_details_page/index.html"
+  localStorage.setItem("Current_order_detail", e.id)
+  window.location.href = "../order_details_page/index.html"
 
 }

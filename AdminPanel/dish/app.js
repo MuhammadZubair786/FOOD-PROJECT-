@@ -1,5 +1,9 @@
 // console.log(firebase)
 let category_data = document.getElementById("category-data")
+let edit_cat_option = document.getElementById("edit_cat_option")
+var dish_name_edit = document.getElementById("dish_name_edit")
+var dish_price_edit = document.getElementById("dish_price_edit")
+
 let dish_name = document.getElementById("dish_name")
 let dish_price = document.getElementById("dish_price")
 var imageUrl = ""
@@ -93,7 +97,7 @@ async function getAllCategory() {
             for (var index in getCategory) {
                 // console.log(getCategory[index])
                 category_data.innerHTML += `<option value=${getCategory[index]["categoryKey"]}>${getCategory[index]["categoryname"]}</option>`
-
+                edit_cat_option.innerHTML += `<option value=${getCategory[index]["categoryKey"]}>${getCategory[index]["categoryname"]}</option>`
             }
 
 
@@ -132,7 +136,7 @@ async function ViewDishes() {
         for(var i in mainData){
             console.log(mainData[i])
             table_data.innerHTML += `
-            <tr>
+            <tr >
   <th scope="row">${(Number(i) + 1)}</th>
   <td>${mainData[i]["category_name"]}</td>
   <td>${mainData[i]["dish_name"]}</td>
@@ -141,6 +145,9 @@ async function ViewDishes() {
 
   <td>
   <img src="${mainData[i]["dish_image"]}"  />
+  </td>
+  <td>
+  <Button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1" value='${mainData[i]["category_key"]}' id='${mainData[i]["dish_key"]}' onclick='editDish(this)'>Edit</Button>
   </td>
  
 </tr>
@@ -154,7 +161,28 @@ async function ViewDishes() {
 ViewDishes()
 
 
-function getAllDishes() {
+async function editDish(e) {
+    console.log(e.id)
+    console.log(e.value)
+    await firebase.database().ref("dishes").child(e.value).child(e.id)
+    .get()
+    .then((snap)=>{
+        console.log(snap.val())
+        console.log(edit_cat_option)
+       for(var i=0;i<edit_cat_option.length;i++){
+        if(snap.val()["category_name"]==edit_cat_option[i].innerText){
+            // console.log(edit_cat_option[i].innerText)
+            edit_cat_option[i].selected=true
+            dish_name_edit.value=snap.val()["dish_name"]
+            dish_price_edit.value= snap.val()["dish_price"]
+
+        }
+       }
+       
+    })
+    .catch((e)=>{
+        console.log(e)
+    })
 
 }
 
