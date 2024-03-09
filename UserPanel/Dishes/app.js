@@ -58,8 +58,10 @@ async function getDishes() {
 //array 
 
 function AddToCard(e) {
+    var checkData = localStorage.getItem("add_to_card")
+    console.log(checkData=="")
 
-    var data = JSON.parse(localStorage.getItem("add_to_card")) ?? []
+    var data = checkData == "" ? [] :  JSON.parse(localStorage.getItem("add_to_card")) ?? []
 
     var i = 0;
     var check = false
